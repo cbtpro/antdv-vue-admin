@@ -1,18 +1,32 @@
 <script setup lang="ts">
-import { ref, onMounted, onBeforeUnmount, watch } from 'vue';
+import { ref, onMounted, onBeforeUnmount, watch, computed } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 import { useTabStore } from '../stores/tabs';
+import { useAppStore } from '../stores/app';
 import { PushpinOutlined } from '@ant-design/icons-vue';
 import type { TabItem } from '../stores/tabs';
 
 const router = useRouter();
 const route = useRoute();
 const tabStore = useTabStore();
+const appStore = useAppStore();
 
 const contextMenuVisible = ref(false);
 const contextMenuPosition = ref({ x: 0, y: 0 });
 const currentContextTab = ref<string>('');
 const currentTab = ref<TabItem | null>(null);
+
+// 主题相关样式
+const tabsContainerStyle = computed(() => ({
+	background: appStore.theme === 'dark' ? '#1f1f1f' : '#fff',
+	borderBottom: `1px solid ${appStore.theme === 'dark' ? '#303030' : '#f0f0f0'}`
+}));
+
+const contextMenuStyle = computed(() => ({
+	background: appStore.theme === 'dark' ? '#1f1f1f' : '#fff',
+	boxShadow: appStore.theme === 'dark' ? '0 2px 8px rgba(0, 0, 0, 0.45)' : '0 2px 8px rgba(0, 0, 0, 0.15)',
+	border: `1px solid ${appStore.theme === 'dark' ? '#303030' : '#f0f0f0'}`
+}));
 
 // 监听路由变化,添加标签页
 watch(
@@ -122,6 +136,8 @@ onBeforeUnmount(() => {
 <template>
 	<div
 		class="tabs-view-container"
+		:class="appStore.theme"
+		:style="tabsContainerStyle"
 		@contextmenu="preventContextMenu"
 	>
 		<a-tabs
@@ -154,10 +170,11 @@ onBeforeUnmount(() => {
 			class="context-menu"
 			:style="{
 				left: `${contextMenuPosition.x}px`,
-				top: `${contextMenuPosition.y}px`
+				top: `${contextMenuPosition.y}px`,
+				...contextMenuStyle
 			}"
 		>
-			<a-menu>
+			<a-menu :theme="appStore.theme">
 				<a-menu-item @click="handleContextMenuClick('closeAll')">关闭所有</a-menu-item>
 				<a-menu-item @click="handleContextMenuClick('closeOthers')">关闭其他</a-menu-item>
 				<a-menu-item @click="handleContextMenuClick('closeRight')">关闭右侧</a-menu-item>
@@ -173,8 +190,8 @@ onBeforeUnmount(() => {
 <style scoped>
 .tabs-view-container {
 	position: relative;
-	background: #fff;
 	padding: 8px 16px;
+	transition: all 0.3s;
 }
 
 .tab-label {
@@ -187,9 +204,8 @@ onBeforeUnmount(() => {
 .context-menu {
 	position: fixed;
 	z-index: 1000;
-	background: #fff;
-	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 	border-radius: 4px;
+	transition: all 0.3s;
 }
 
 :deep(.ant-tabs-tab) {
@@ -202,5 +218,29 @@ onBeforeUnmount(() => {
 
 :deep(.ant-tabs-nav) {
 	margin-bottom: 0;
+}
+
+/* 深色主题特定样式 */
+.dark :deep(.ant-tabs-tab) {
+	border-color: #303030;
+	background: #1f1f1f;
+	color: rgba(255, 255, 255, 0.85);
+}
+
+.dark :deep(.ant-tabs-tab:hover) {
+	color: #1890ff;
+}
+
+.dark :deep(.ant-tabs-tab-active) {
+	background: #141414 !important;
+	border-color: #303030 !important;
+}
+
+.dark :deep(.ant-tabs-nav) {
+	border-color: #303030;
+}
+
+.dark :deep(.ant-tabs-nav::before) {
+	border-bottom-color: #303030;
 }
 </style>
