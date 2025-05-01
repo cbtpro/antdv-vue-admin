@@ -1,14 +1,16 @@
-import { createApp } from 'vue'
-import { createPinia } from 'pinia'
-import { createI18n } from 'vue-i18n'
-import Antd from 'ant-design-vue'
-import 'ant-design-vue/dist/reset.css'
-import './style.css'
-import App from './App.vue'
-import router from './router'
-import en from './locales/en'
-import zh from './locales/zh'
-import { useAppStore } from './stores/app'
+import './assets/main.css';
+
+import { createApp } from 'vue';
+import { createPinia } from 'pinia';
+import { createI18n } from 'vue-i18n';
+import Antd from 'ant-design-vue';
+import 'ant-design-vue/dist/reset.css';
+import '@/style.css';
+import App from '@/App.vue';
+import router from '@/router';
+import en from '@/locales/en';
+import zh from '@/locales/zh';
+import { useAppStore } from '@/stores/app';
 
 const i18n = createI18n({
   legacy: false,
@@ -17,18 +19,18 @@ const i18n = createI18n({
     en,
     zh
   }
-})
+});
 
-const app = createApp(App)
-const pinia = createPinia()
+const app = createApp(App);
+const pinia = createPinia();
 
-app.use(router)
-app.use(pinia)
-app.use(i18n)
-app.use(Antd)
+app.use(router);
+app.use(pinia);
+app.use(i18n);
+app.use(Antd);
 
-const appStore = useAppStore(pinia)
-appStore.initSettings()
-i18n.global.locale.value = appStore.locale
+const appStore = useAppStore(pinia);
+appStore.initSettings();
+i18n.global.locale.value = appStore.locale;
 
-app.mount('#app')
+app.mount('#app');

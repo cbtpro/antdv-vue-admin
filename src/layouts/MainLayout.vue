@@ -11,9 +11,9 @@ import {
   MenuFoldOutlined,
   MenuUnfoldOutlined
 } from '@ant-design/icons-vue';
-import TabsView from '../components/TabsView.vue';
-import HeaderActions from '../components/HeaderActions.vue';
-import { useAppStore } from '../stores/app';
+import TabsView from '@/components/TabsView.vue';
+import HeaderActions from '@/components/HeaderActions.vue';
+import { useAppStore } from '@/stores/app';
 // import { SelectInfo } from 'ant-design-vue/es/menu/src/interface';
 
 const { t } = useI18n();
@@ -170,7 +170,7 @@ const handleMenuClick = (key: string) => {
       </a-menu>
     </a-layout-sider>
     <a-layout>
-      <a-layout-header :style="headerStyles">
+      <a-layout-header :style="headerStyles" class="header">
         <menu-unfold-outlined v-if="collapsed" class="trigger" @click="() => (collapsed = !collapsed)" />
         <menu-fold-outlined v-else class="trigger" @click="() => (collapsed = !collapsed)" />
         <HeaderActions />
@@ -225,5 +225,9 @@ const handleMenuClick = (key: string) => {
 
 :deep(.ant-layout-footer) {
   transition: all 0.3s;
+}
+
+.header {
+  padding-inline: 0;
 }
 </style>
