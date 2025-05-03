@@ -12,7 +12,7 @@ export interface TabItem {
 
 export const useTabStore = defineStore('tabs', () => {
   const tabs = ref<TabItem[]>([
-    { key: 'home', title: '首页', path: '/', closable: false, fixed: true }
+    { key: 'home', title: '首页', path: '/', closable: false, fixed: false }
   ]);
   const activeTab = ref('home');
   const settings = ref({

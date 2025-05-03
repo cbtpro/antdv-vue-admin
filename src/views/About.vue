@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { GithubOutlined, TwitterOutlined, LinkedinOutlined } from '@ant-design/icons-vue'
+import { GithubOutlined, TwitterOutlined, LinkedinOutlined } from '@ant-design/icons-vue';
 
 const teamMembers = [
   {
@@ -20,7 +20,7 @@ const teamMembers = [
     avatar: 'https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
     description: '具有丰富的产品规划和团队管理经验'
   }
-]
+];
 </script>
 
 <template>
@@ -65,15 +65,21 @@ const teamMembers = [
         <a-card title="联系我们">
           <a-space>
             <a-button type="primary" href="https://github.com" target="_blank">
-              <template #icon><GithubOutlined /></template>
+              <template #icon>
+                <GithubOutlined />
+              </template>
               GitHub
             </a-button>
             <a-button href="https://twitter.com" target="_blank">
-              <template #icon><TwitterOutlined /></template>
+              <template #icon>
+                <TwitterOutlined />
+              </template>
               Twitter
             </a-button>
             <a-button type="primary" href="https://linkedin.com" target="_blank">
-              <template #icon><LinkedinOutlined /></template>
+              <template #icon>
+                <LinkedinOutlined />
+              </template>
               LinkedIn
             </a-button>
           </a-space>

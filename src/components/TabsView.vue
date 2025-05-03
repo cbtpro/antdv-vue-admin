@@ -138,7 +138,7 @@ onBeforeUnmount(() => {
     @contextmenu="preventContextMenu">
     <a-tabs v-model:activeKey="tabStore.activeTab" type="editable-card" hide-add @tabClick="handleTabClick"
       @edit="handleTabEdit">
-      <a-tab-pane v-for="tab in tabStore.tabs" :key="tab.key" :closable="!tab.fixed">
+      <a-tab-pane v-for="tab in tabStore.tabs" :key="tab.key" :closable="!tab.fixed && tab.key !== 'home'">
         <template #tab>
           <div class="tab-label" @contextmenu.prevent.stop="e => showContextMenu(e, tab)">
             {{ tab.title }}
@@ -170,7 +170,7 @@ onBeforeUnmount(() => {
 <style scoped>
 .tabs-view-container {
   position: relative;
-  padding: 8px 16px;
+  padding: 1px 2px;
   transition: all 0.3s;
 }
 

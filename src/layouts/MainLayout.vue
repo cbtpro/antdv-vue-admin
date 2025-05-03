@@ -25,12 +25,6 @@ const collapsed = ref<boolean>(false);
 const selectedKeys = ref<string[]>(['home']);
 const openKeys = ref<string[]>(['practices']);
 
-// 计算主题相关的样式
-// const themeStyles = computed(() => ({
-//   background: appStore.theme === 'dark' ? '#141414' : '#fff',
-//   color: appStore.theme === 'dark' ? '#fff' : 'rgba(0, 0, 0, 0.85)'
-// }));
-
 const headerStyles = computed(() => ({
   background: appStore.theme === 'dark' ? '#1f1f1f' : '#fff',
   color: appStore.theme === 'dark' ? '#fff' : 'rgba(0, 0, 0, 0.85)',
@@ -38,17 +32,6 @@ const headerStyles = computed(() => ({
   display: 'flex',
   justifyContent: 'space-between',
   alignItems: 'center'
-}));
-
-const contentStyles = computed(() => ({
-  background: appStore.theme === 'dark' ? '#141414' : '#f0f2f5',
-  color: appStore.theme === 'dark' ? '#fff' : 'rgba(0, 0, 0, 0.85)'
-}));
-
-const footerStyles = computed(() => ({
-  background: appStore.theme === 'dark' ? '#1f1f1f' : '#f0f0f0',
-  color: appStore.theme === 'dark' ? '#fff' : 'rgba(0, 0, 0, 0.85)',
-  textAlign: 'center'
 }));
 
 // 动态构建菜单项，确保语言切换时菜单标签会更新
@@ -95,6 +78,19 @@ watch(
   }
 );
 
+const flashTimer = ref<number | null>(null);
+const flashMenu = (key: string) => {
+  openKeys.value = [key];
+  if (!collapsed.value) {
+    return;
+  }
+  if (flashTimer.value) {
+    window.clearTimeout(flashTimer.value);
+  }
+  flashTimer.value = window.setTimeout(() => {
+    openKeys.value = [];
+  }, 800);
+};
 // 监听路由变化，更新选中的菜单项
 watch(
   () => route.path,
@@ -105,7 +101,7 @@ watch(
         if (item.children) {
           const key = findMenuKey(item.children, path);
           if (key) {
-            openKeys.value = [item.key];
+            flashMenu(item.key);
             return key;
           }
         }
@@ -141,7 +137,7 @@ const handleMenuClick = (key: string) => {
 </script>
 
 <template>
-  <a-layout style="min-height: 100vh" :class="appStore.theme">
+  <a-layout style="height: 100vh" :class="appStore.theme">
     <a-layout-sider v-model:collapsed="collapsed" collapsible :theme="appStore.theme">
       <div class="logo" :class="appStore.theme" />
       <a-menu v-model:selectedKeys="selectedKeys" v-model:openKeys="openKeys" :theme="appStore.theme" mode="inline"
@@ -176,10 +172,10 @@ const handleMenuClick = (key: string) => {
         <HeaderActions />
       </a-layout-header>
       <TabsView />
-      <a-layout-content :style="contentStyles" style="margin: 16px">
+      <a-layout-content style="overflow: auto;">
         <router-view></router-view>
       </a-layout-content>
-      <a-layout-footer :style="footerStyles">Ant Design Vue ©2024 Created by Ant UED</a-layout-footer>
+      <a-layout-footer>Ant Design Vue ©2024 Created by Ant UED</a-layout-footer>
     </a-layout>
   </a-layout>
 </template>

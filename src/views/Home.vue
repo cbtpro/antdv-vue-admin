@@ -1,24 +1,24 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref } from 'vue';
 import {
   UserOutlined,
   MessageOutlined,
   SolutionOutlined,
   TeamOutlined
-} from '@ant-design/icons-vue'
+} from '@ant-design/icons-vue';
 
 const statistics = ref([
   { title: '活跃用户', value: '1,128', icon: UserOutlined, color: '#1890ff' },
   { title: '系统消息', value: '93', icon: MessageOutlined, color: '#52c41a' },
   { title: '工单数量', value: '56', icon: SolutionOutlined, color: '#faad14' },
-  { title: '团队成员', value: '8', icon: TeamOutlined, color: '#722ed1' }
-])
+  // { title: '团队成员', value: '8', icon: TeamOutlined, color: '#722ed1' }
+]);
 
 const announcements = ref([
   { title: '系统更新通知', date: '2024-03-20', content: '系统将于本周六进行例行维护更新' },
   { title: '新功能发布', date: '2024-03-18', content: '表单构建器功能已上线' },
   { title: '团队会议', date: '2024-03-15', content: '下周一上午10点全体会议' }
-])
+]);
 </script>
 
 <template>
@@ -38,10 +38,7 @@ const announcements = ref([
       <a-list :data-source="announcements">
         <template #renderItem="{ item }">
           <a-list-item>
-            <a-list-item-meta
-              :title="item.title"
-              :description="item.content"
-            >
+            <a-list-item-meta :title="item.title" :description="item.content">
               <template #extra>{{ item.date }}</template>
             </a-list-item-meta>
           </a-list-item>
