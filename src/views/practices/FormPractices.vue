@@ -3,6 +3,8 @@ import { ref, reactive } from 'vue';
 import type { FormInstance } from 'ant-design-vue';
 import { message } from 'ant-design-vue';
 import StickyFooterLayout from '@/components/StickyFooterLayout.vue';
+import RichEditor from '@/components/RichEditor.vue';
+import RichEditorInline from '@/components/RichEditorInline.vue';
 
 const formRef = ref<FormInstance>();
 const formLayout = ref<'horizontal' | 'vertical' | 'inline'>('horizontal');
@@ -45,9 +47,10 @@ const rules = {
   ],
   phone: [
     { required: true, message: '请输入手机号' },
-    { pattern: /^1[3-9]\d{9}$/, message: '请输入有效的手机号' }
+    { pattern: /^1[3-9]\d{9}$/, message: '请输入有效的手机号', }
   ],
   gender: [{ required: true, message: '请选择性别' }],
+  introduction: [{ required: true, message: '请输入个人简介', }],
   agreement: [
     {
       validator: async (_rule: any, value: boolean) => {
@@ -74,6 +77,10 @@ const handleReset = () => {
 };
 
 const boundingInfoOptions = { prefix: '--bounding-info-' };
+
+const toggleIntroductionVisible = () => {
+
+};
 </script>
 
 <template>
@@ -133,8 +140,11 @@ const boundingInfoOptions = { prefix: '--bounding-info-' };
             </a-checkbox-group>
           </a-form-item>
 
-          <a-form-item label="个人简介" name="introduction">
-            <a-textarea v-model:value="formState.introduction" :rows="4" placeholder="请输入个人简介" />
+          <a-form-item label="个人简介" name="introduction" @click="toggleIntroductionVisible">
+            <!-- <a-textarea v-model:value="formState.introduction" :rows="4" placeholder="请输入个人简介" /> -->
+            <RichEditorInline v-if="formLayout === 'inline'" v-model:value="formState.introduction"
+              placeholder="请输入个人简介" />
+            <RichEditor v-else v-model:value="formState.introduction" placeholder="请输入个人简介" />
           </a-form-item>
 
           <a-form-item name="agreement" :wrapper-col="{ offset: formLayout === 'horizontal' ? 4 : 0 }">
