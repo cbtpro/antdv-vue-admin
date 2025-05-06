@@ -3,6 +3,9 @@ export default {
     home: 'Home',
     practices: 'Best Practices',
     form: 'Form Best Practices',
+    'related-form': 'Related Form Practices',
+    'dynamic-form': 'Dynamic Form Practices',
+    stepForm: 'Step Form',
     about: 'About',
     settings: 'Settings'
   },
@@ -22,4 +25,4 @@ export default {
       restore: 'Restore tabs when reopening the page'
     }
   }
-}
+};

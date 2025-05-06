@@ -1,7 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import MainLayout from '@/layouts/MainLayout.vue';
 import Home from '@/views/Home.vue';
-import FormPractices from '@/views/practices/FormPractices.vue';
 import About from '@/views/About.vue';
 import Settings from '@/views/Settings.vue';
 
@@ -24,9 +23,28 @@ const router = createRouter({
           meta: { title: '最佳实践' },
           children: [
             {
+              path: 'related-form',
+              name: 'related-form',
+              component: () => import('@/views/practices/SimpleFormPractices.vue'),
+              meta: { title: '关联表单' }
+            },
+            {
+              path: 'step-form',
+              name: 'step-form',
+              component: () => import('@/views/practices/step-form/index.vue'),
+              meta: { title: '分步表单' }
+            },
+
+            {
+              path: 'dynamic-form',
+              name: 'dynamic-form',
+              component: () => import('@/views/practices/dynamic-form-demo/index.vue'),
+              meta: { title: '动态表单' }
+            },
+            {
               path: 'form',
               name: 'form',
-              component: FormPractices,
+              component: () => import('@/views/practices/FormPractices.vue'),
               meta: { title: '表单最佳实践' }
             }
           ]

@@ -2,86 +2,73 @@
   <div class="editor-container">
     <div class="control-group">
       <div class="button-group">
-        <button @click="editor?.chain().focus().toggleBold().run()" :class="{ 'is-active': editor?.isActive('bold') }">
+        <a-button size="small" @click="editor?.chain().focus().toggleBold().run()"
+          :class="{ 'is-active': editor?.isActive('bold') }">
           加粗
-        </button>
-        <button @click="editor?.chain().focus().toggleItalic().run()"
+        </a-button>
+        <a-button size="small" @click="editor?.chain().focus().toggleItalic().run()"
           :class="{ 'is-active': editor?.isActive('italic') }">
           斜体
-        </button>
-        <button @click="editor?.chain().focus().toggleStrike().run()"
+        </a-button>
+        <a-button size="small" @click="editor?.chain().focus().toggleStrike().run()"
           :class="{ 'is-active': editor?.isActive('strike') }">
           删除线
-        </button>
-        <button @click="editor?.chain().focus().toggleCode().run()" :class="{ 'is-active': editor?.isActive('code') }">
+        </a-button>
+        <a-button size="small" @click="editor?.chain().focus().toggleCode().run()"
+          :class="{ 'is-active': editor?.isActive('code') }">
           行内代码
-        </button>
-        <button @click="editor?.chain().focus().unsetAllMarks().run()">
+        </a-button>
+        <a-button size="small" @click="editor?.chain().focus().unsetAllMarks().run()">
           清除样式
-        </button>
-        <button @click="editor?.chain().focus().clearNodes().run()">
+        </a-button>
+        <a-button size="small" @click="editor?.chain().focus().clearNodes().run()">
           清除节点
-        </button>
-        <button @click="editor?.chain().focus().setParagraph().run()"
+        </a-button>
+        <a-button size="small" @click="editor?.chain().focus().setParagraph().run()"
           :class="{ 'is-active': editor?.isActive('paragraph') }">
           段落
-        </button>
-        <button @click="editor?.chain().focus().toggleHeading({ level: 1 }).run()"
-          :class="{ 'is-active': editor?.isActive('heading', { level: 1 }) }">
-          标题一
-        </button>
-        <button @click="editor?.chain().focus().toggleHeading({ level: 2 }).run()"
-          :class="{ 'is-active': editor?.isActive('heading', { level: 2 }) }">
-          标题二
-        </button>
-        <button @click="editor?.chain().focus().toggleHeading({ level: 3 }).run()"
-          :class="{ 'is-active': editor?.isActive('heading', { level: 3 }) }">
-          标题三
-        </button>
-        <button @click="editor?.chain().focus().toggleHeading({ level: 4 }).run()"
-          :class="{ 'is-active': editor?.isActive('heading', { level: 4 }) }">
-          标题四
-        </button>
-        <button @click="editor?.chain().focus().toggleHeading({ level: 5 }).run()"
-          :class="{ 'is-active': editor?.isActive('heading', { level: 5 }) }">
-          标题五
-        </button>
-        <button @click="editor?.chain().focus().toggleHeading({ level: 6 }).run()"
-          :class="{ 'is-active': editor?.isActive('heading', { level: 6 }) }">
-          标题六
-        </button>
-        <button @click="editor?.chain().focus().toggleBulletList().run()"
+        </a-button>
+        <a-select size="small" placeholder="选择标题等级" style="width: 160px"
+          @change="(level: Level) => editor?.chain().focus().toggleHeading({ level }).run()"
+          :value="getCurrentHeadingLevel()">
+          <a-select-option :value="''">正文</a-select-option>
+          <a-select-option :value="1">标题一 (H1)</a-select-option>
+          <a-select-option :value="2">标题二 (H2)</a-select-option>
+          <a-select-option :value="3">标题三 (H3)</a-select-option>
+          <a-select-option :value="4">标题四 (H4)</a-select-option>
+          <a-select-option :value="5">标题五 (H5)</a-select-option>
+          <a-select-option :value="6">标题六 (H6)</a-select-option>
+        </a-select>
+        <a-button size="small" @click="editor?.chain().focus().toggleBulletList().run()"
           :class="{ 'is-active': editor?.isActive('bulletList') }">
           无序列表
-        </button>
-        <button @click="editor?.chain().focus().toggleOrderedList().run()"
+        </a-button>
+        <a-button size="small" @click="editor?.chain().focus().toggleOrderedList().run()"
           :class="{ 'is-active': editor?.isActive('orderedList') }">
           有序列表
-        </button>
-        <button @click="editor?.chain().focus().toggleCodeBlock().run()"
+        </a-button>
+        <a-button size="small" @click="editor?.chain().focus().toggleCodeBlock().run()"
           :class="{ 'is-active': editor?.isActive('codeBlock') }">
           代码块
-        </button>
-        <button @click="editor?.chain().focus().toggleBlockquote().run()"
+        </a-button>
+        <a-button size="small" @click="editor?.chain().focus().toggleBlockquote().run()"
           :class="{ 'is-active': editor?.isActive('blockquote') }">
           引用
-        </button>
-        <button @click="editor?.chain().focus().setHorizontalRule().run()">
+        </a-button>
+        <a-button size="small" @click="editor?.chain().focus().setHorizontalRule().run()">
           水平线
-        </button>
-        <button @click="editor?.chain().focus().setHardBreak().run()">
+        </a-button>
+        <a-button size="small" @click="editor?.chain().focus().setHardBreak().run()">
           强制换行
-        </button>
-        <button @click="editor?.chain().focus().undo().run()">
+        </a-button>
+        <a-button size="small" @click="editor?.chain().focus().undo().run()">
           撤销
-        </button>
-        <button @click="editor?.chain().focus().redo().run()">
+        </a-button>
+        <a-button size="small" @click="editor?.chain().focus().redo().run()">
           重做
-        </button>
+        </a-button>
       </div>
-
     </div>
-
     <EditorContent :editor="editor" class="editor" />
   </div>
 </template>
@@ -91,6 +78,7 @@ import { ref, onBeforeUnmount, watch } from 'vue';
 import { useEditor, EditorContent } from '@tiptap/vue-3';
 import StarterKit from '@tiptap/starter-kit';
 import Placeholder from '@tiptap/extension-placeholder';
+import type { Level } from '@tiptap/extension-heading';
 
 interface IProps {
   value?: string;
@@ -142,6 +130,14 @@ watch(
 onBeforeUnmount(() => {
   editor.value?.destroy();
 });
+const getCurrentHeadingLevel = () => {
+  for (let i = 1; i <= 6; i++) {
+    if (editor.value?.isActive('heading', { level: i })) {
+      return i;
+    }
+  }
+  return '';
+};
 </script>
 
 <style lang="less">
@@ -180,47 +176,47 @@ onBeforeUnmount(() => {
     padding: 0
   }
 
-  button {
-    background: var(--gray-2);
-    border-radius: .5rem;
-    border: none;
-    color: var(--black);
-    font-family: inherit;
-    font-size: .875rem;
-    font-weight: 500;
-    line-height: 1.15;
-    margin: none;
-    padding: .375rem .625rem;
-    transition: all .2s cubic-bezier(.65, .05, .36, 1)
-  }
+  // button {
+  //   background: var(--gray-2);
+  //   border-radius: .5rem;
+  //   border: none;
+  //   color: var(--black);
+  //   font-family: inherit;
+  //   font-size: .875rem;
+  //   font-weight: 500;
+  //   line-height: 1.15;
+  //   margin: none;
+  //   padding: .375rem .625rem;
+  //   transition: all .2s cubic-bezier(.65, .05, .36, 1)
+  // }
 
-  button:hover {
-    background-color: var(--gray-3);
-    color: var(--black-contrast)
-  }
+  // button:hover {
+  //   background-color: var(--gray-3);
+  //   color: var(--black-contrast)
+  // }
 
-  button[disabled] {
-    background: var(--gray-1);
-    color: var(--gray-4)
-  }
+  // button[disabled] {
+  //   background: var(--gray-1);
+  //   color: var(--gray-4)
+  // }
 
-  button:checked {
-    accent-color: var(--purple)
-  }
+  // button:checked {
+  //   accent-color: var(--purple)
+  // }
 
-  button.primary {
-    background: var(--black);
-    color: var(--white)
-  }
+  // button.primary {
+  //   background: var(--black);
+  //   color: var(--white)
+  // }
 
-  button.primary:hover {
-    background-color: var(--black-contrast)
-  }
+  // button.primary:hover {
+  //   background-color: var(--black-contrast)
+  // }
 
-  button.primary[disabled] {
-    background: var(--gray-1);
-    color: var(--gray-4)
-  }
+  // button.primary[disabled] {
+  //   background: var(--gray-1);
+  //   color: var(--gray-4)
+  // }
 
   button.is-active {
     background: var(--purple);
@@ -232,9 +228,9 @@ onBeforeUnmount(() => {
     color: var(--white)
   }
 
-  button:not([disabled]) {
-    cursor: pointer
-  }
+  // button:not([disabled]) {
+  //   cursor: pointer
+  // }
 
   .editor {
     border: 1px solid #ccc;

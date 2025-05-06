@@ -48,6 +48,21 @@ const getMenuItems = () => [
     label: t('menu.practices'),
     children: [
       {
+        key: 'related-form',
+        label: t('menu.related-form'),
+        path: '/practices/related-form'
+      },
+      {
+        key: 'dynamic-form',
+        label: t('menu.dynamic-form'),
+        path: '/practices/dynamic-form'
+      },
+      {
+        key: 'step-form',
+        label: t('menu.stepForm'),
+        path: '/practices/step-form'
+      },
+      {
         key: 'form',
         label: t('menu.form'),
         path: '/practices/form'

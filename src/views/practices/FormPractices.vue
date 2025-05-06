@@ -6,6 +6,9 @@ import StickyFooterLayout from '@/components/StickyFooterLayout.vue';
 import RichEditor from '@/components/RichEditor.vue';
 import RichEditorInline from '@/components/RichEditorInline.vue';
 
+defineOptions({
+  name: 'PageFormPractices'
+});
 const formRef = ref<FormInstance>();
 const formLayout = ref<'horizontal' | 'vertical' | 'inline'>('horizontal');
 
