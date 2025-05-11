@@ -52,20 +52,55 @@ const getMenuItems = () => [
         label: t('menu.related-form'),
         path: '/practices/related-form'
       },
-      {
-        key: 'dynamic-form',
-        label: t('menu.dynamic-form'),
-        path: '/practices/dynamic-form'
-      },
-      {
-        key: 'step-form',
-        label: t('menu.stepForm'),
-        path: '/practices/step-form'
-      },
+      // {
+      //   key: 'dynamic-form',
+      //   label: t('menu.dynamic-form'),
+      //   path: '/practices/dynamic-form'
+      // },
+      // {
+      //   key: 'step-form',
+      //   label: t('menu.stepForm'),
+      //   path: '/practices/step-form'
+      // },
       {
         key: 'form',
         label: t('menu.form'),
         path: '/practices/form'
+      },
+      {
+        key: 'base-form',
+        label: '基础表单',
+        path: '/practices/basic',
+      },
+      {
+        key: 'dynamic-form1',
+        label: '动态表单',
+        path: '/practices/dynamic',
+      },
+      {
+        key: 'multi-step',
+        label: '多步骤表单',
+        path: '/practices/multi-step',
+      },
+      {
+        key: 'search',
+        label: '搜索表单',
+        path: '/practices/search',
+      },
+      {
+        key: 'advanced-filter',
+        label: '高级筛选',
+        path: '/practices/advanced-filter',
+      },
+      {
+        key: 'table',
+        label: '表格表单',
+        path: '/practices/table',
+      },
+      {
+        key: 'custom',
+        label: '自定义表单',
+        path: '/practices/custom',
       }
     ]
   },

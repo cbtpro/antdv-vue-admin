@@ -20,12 +20,11 @@ export const useTabStore = defineStore('tabs', () => {
   });
 
   const addTab = (route: RouteLocationNormalized) => {
-    const { name, path, meta } = route;
+    const { name, path, meta = {} } = route;
     if (!name) return;
 
     const key = name as string;
-    const title = meta.title as string;
-
+    const title = meta?.title as string ?? '未知标题';
     if (!tabs.value.some(tab => tab.key === key)) {
       tabs.value.push({
         key,

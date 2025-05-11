@@ -46,6 +46,48 @@ const router = createRouter({
               name: 'form',
               component: () => import('@/views/practices/FormPractices.vue'),
               meta: { title: '表单最佳实践' }
+            },
+            {
+              path: 'basic',
+              name: 'basic',
+              component: () => import('@/views/practices/BasicForm.vue'),
+              meta: { title: '基础表单' }
+            },
+            {
+              path: 'dynamic',
+              name: 'dynamic',
+              component: () => import('@/views/practices/DynamicForm.vue'),
+              meta: { title: '动态表单' }
+            },
+            {
+              path: 'multi-step',
+              name: 'multi-step',
+              component: () => import('@/views/practices/MultiStepForm.vue'),
+              meta: { title: '多步骤表单' }
+            },
+            {
+              path: 'search',
+              name: 'search',
+              component: () => import('@/views/practices/SearchForm.vue'),
+              meta: { title: '搜索表单' }
+            },
+            {
+              path: 'advanced-filter',
+              name: 'advanced-filter',
+              component: () => import('@/views/practices/AdvancedFilterForm.vue'),
+              meta: { title: '高级搜索表单' }
+            },
+            {
+              path: 'table',
+              name: 'table',
+              component: () => import('@/views/practices/TableForm.vue'),
+              meta: { title: '表格表单' }
+            },
+            {
+              path: 'custom',
+              name: 'custom',
+              component: () => import('@/views/practices/CustomForm.vue'),
+              meta: { title: '自定义表单' }
             }
           ]
         },
