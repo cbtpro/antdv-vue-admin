@@ -1,18 +1,24 @@
 <template>
   <div class="rich-editor-inline">
-    <a-drawer :width="500" :title="title" :placement="placement" :open="open" @close="onClose">
+    <a-drawer
+      :width="500"
+      :title="title"
+      :placement="placement"
+      :open="drawerOpenned"
+      @close="onClose"
+    >
       <template #extra>
         <a-button type="primary" @click="onClose">关闭</a-button>
       </template>
 
       <RichEditor v-model:value="localModel" :placeholder="placeholder" />
     </a-drawer>
-    <div @click="showDrawer" class="echo">{{ value }}</div>
+    <div @click="showDrawer" class="echo">{{ value ? value : '点击编辑' }}</div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted, ref } from 'vue';
+import { computed, ref } from 'vue';
 import RichEditor from './RichEditor.vue';
 import type { DrawerProps } from 'ant-design-vue';
 
@@ -39,17 +45,17 @@ const emits = defineEmits<{
 }>();
 const localModel = computed({
   get: () => props.value,
-  set: (val) => emits('update:value', val)
+  set: (val) => emits('update:value', val),
 });
-const placement = ref<DrawerProps['placement']>('right');
-const open = ref<boolean>(false);
+
+const drawerOpenned = ref<boolean>(false);
 
 const showDrawer = () => {
-  open.value = true;
+  drawerOpenned.value = true;
 };
 
 const onClose = () => {
-  open.value = false;
+  drawerOpenned.value = false;
 };
 </script>
 

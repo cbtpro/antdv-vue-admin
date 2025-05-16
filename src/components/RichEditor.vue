@@ -2,20 +2,32 @@
   <div class="editor-container">
     <div class="control-group">
       <div class="button-group">
-        <a-button size="small" @click="editor?.chain().focus().toggleBold().run()"
-          :class="{ 'is-active': editor?.isActive('bold') }">
+        <a-button
+          size="small"
+          @click="editor?.chain().focus().toggleBold().run()"
+          :class="{ 'is-active': editor?.isActive('bold') }"
+        >
           加粗
         </a-button>
-        <a-button size="small" @click="editor?.chain().focus().toggleItalic().run()"
-          :class="{ 'is-active': editor?.isActive('italic') }">
+        <a-button
+          size="small"
+          @click="editor?.chain().focus().toggleItalic().run()"
+          :class="{ 'is-active': editor?.isActive('italic') }"
+        >
           斜体
         </a-button>
-        <a-button size="small" @click="editor?.chain().focus().toggleStrike().run()"
-          :class="{ 'is-active': editor?.isActive('strike') }">
+        <a-button
+          size="small"
+          @click="editor?.chain().focus().toggleStrike().run()"
+          :class="{ 'is-active': editor?.isActive('strike') }"
+        >
           删除线
         </a-button>
-        <a-button size="small" @click="editor?.chain().focus().toggleCode().run()"
-          :class="{ 'is-active': editor?.isActive('code') }">
+        <a-button
+          size="small"
+          @click="editor?.chain().focus().toggleCode().run()"
+          :class="{ 'is-active': editor?.isActive('code') }"
+        >
           行内代码
         </a-button>
         <a-button size="small" @click="editor?.chain().focus().unsetAllMarks().run()">
@@ -24,35 +36,57 @@
         <a-button size="small" @click="editor?.chain().focus().clearNodes().run()">
           清除节点
         </a-button>
-        <a-button size="small" @click="editor?.chain().focus().setParagraph().run()"
-          :class="{ 'is-active': editor?.isActive('paragraph') }">
+        <a-button
+          size="small"
+          @click="editor?.chain().focus().setParagraph().run()"
+          :class="{ 'is-active': editor?.isActive('paragraph') }"
+        >
           段落
         </a-button>
-        <a-select size="small" placeholder="选择标题等级" style="width: 160px"
-          @change="(level: Level) => editor?.chain().focus().toggleHeading({ level }).run()"
-          :value="getCurrentHeadingLevel()">
-          <a-select-option :value="''">正文</a-select-option>
-          <a-select-option :value="1">标题一 (H1)</a-select-option>
-          <a-select-option :value="2">标题二 (H2)</a-select-option>
-          <a-select-option :value="3">标题三 (H3)</a-select-option>
-          <a-select-option :value="4">标题四 (H4)</a-select-option>
-          <a-select-option :value="5">标题五 (H5)</a-select-option>
-          <a-select-option :value="6">标题六 (H6)</a-select-option>
-        </a-select>
-        <a-button size="small" @click="editor?.chain().focus().toggleBulletList().run()"
-          :class="{ 'is-active': editor?.isActive('bulletList') }">
+        <a-form-item-rest>
+          <a-select
+            size="small"
+            placeholder="选择标题等级"
+            style="width: 160px"
+            @change="(level: Level) => editor?.chain().focus().toggleHeading({ level }).run()"
+            :value="getCurrentHeadingLevel()"
+            noStyle
+          >
+            <a-select-option :value="''">正文</a-select-option>
+            <a-select-option :value="1">标题一 (H1)</a-select-option>
+            <a-select-option :value="2">标题二 (H2)</a-select-option>
+            <a-select-option :value="3">标题三 (H3)</a-select-option>
+            <a-select-option :value="4">标题四 (H4)</a-select-option>
+            <a-select-option :value="5">标题五 (H5)</a-select-option>
+            <a-select-option :value="6">标题六 (H6)</a-select-option>
+          </a-select>
+        </a-form-item-rest>
+        <a-button
+          size="small"
+          @click="editor?.chain().focus().toggleBulletList().run()"
+          :class="{ 'is-active': editor?.isActive('bulletList') }"
+        >
           无序列表
         </a-button>
-        <a-button size="small" @click="editor?.chain().focus().toggleOrderedList().run()"
-          :class="{ 'is-active': editor?.isActive('orderedList') }">
+        <a-button
+          size="small"
+          @click="editor?.chain().focus().toggleOrderedList().run()"
+          :class="{ 'is-active': editor?.isActive('orderedList') }"
+        >
           有序列表
         </a-button>
-        <a-button size="small" @click="editor?.chain().focus().toggleCodeBlock().run()"
-          :class="{ 'is-active': editor?.isActive('codeBlock') }">
+        <a-button
+          size="small"
+          @click="editor?.chain().focus().toggleCodeBlock().run()"
+          :class="{ 'is-active': editor?.isActive('codeBlock') }"
+        >
           代码块
         </a-button>
-        <a-button size="small" @click="editor?.chain().focus().toggleBlockquote().run()"
-          :class="{ 'is-active': editor?.isActive('blockquote') }">
+        <a-button
+          size="small"
+          @click="editor?.chain().focus().toggleBlockquote().run()"
+          :class="{ 'is-active': editor?.isActive('blockquote') }"
+        >
           引用
         </a-button>
         <a-button size="small" @click="editor?.chain().focus().setHorizontalRule().run()">
@@ -61,12 +95,8 @@
         <a-button size="small" @click="editor?.chain().focus().setHardBreak().run()">
           强制换行
         </a-button>
-        <a-button size="small" @click="editor?.chain().focus().undo().run()">
-          撤销
-        </a-button>
-        <a-button size="small" @click="editor?.chain().focus().redo().run()">
-          重做
-        </a-button>
+        <a-button size="small" @click="editor?.chain().focus().undo().run()"> 撤销 </a-button>
+        <a-button size="small" @click="editor?.chain().focus().redo().run()"> 重做 </a-button>
       </div>
     </div>
     <EditorContent :editor="editor" class="editor" />
@@ -90,7 +120,7 @@ defineOptions({
 });
 const props = withDefaults(defineProps<IProps>(), {
   value: '',
-  placeholder: '请输入内容'
+  placeholder: '请输入内容',
 });
 
 const emit = defineEmits(['update:value']);
@@ -115,7 +145,7 @@ const editor = useEditor({
     const html = editor.getHTML();
     emit('update:value', html);
     renderedHtml.value = html;
-  }
+  },
 });
 
 watch(
@@ -124,7 +154,7 @@ watch(
     if (editor.value && newVal !== editor.value.getHTML()) {
       editor.value.commands.setContent(newVal || '<p></p>');
     }
-  }
+  },
 );
 
 onBeforeUnmount(() => {
@@ -154,7 +184,7 @@ const getCurrentHeadingLevel = () => {
   .button-group {
     display: flex;
     flex-wrap: wrap;
-    gap: .25rem;
+    gap: 0.25rem;
     padding: 4px;
   }
 
@@ -169,11 +199,11 @@ const getCurrentHeadingLevel = () => {
 
   .control-group .sticky {
     position: sticky;
-    top: 0
+    top: 0;
   }
 
-  [data-node-view-wrapper]>.control-group {
-    padding: 0
+  [data-node-view-wrapper] > .control-group {
+    padding: 0;
   }
 
   // button {
@@ -220,12 +250,12 @@ const getCurrentHeadingLevel = () => {
 
   button.is-active {
     background: var(--purple);
-    color: var(--white)
+    color: var(--white);
   }
 
   button.is-active:hover {
     background-color: var(--purple-contrast);
-    color: var(--white)
+    color: var(--white);
   }
 
   // button:not([disabled]) {
@@ -241,8 +271,6 @@ const getCurrentHeadingLevel = () => {
     background: #fff;
     overflow-y: auto;
 
-
-
     :deep(.tiptap) {
       caret-color: var(--purple);
       margin: 1.5rem;
@@ -256,77 +284,75 @@ const getCurrentHeadingLevel = () => {
       }
 
       :first-child {
-        margin-top: 0
+        margin-top: 0;
       }
 
       &:focus {
-        outline: none
+        outline: none;
       }
 
       ::-webkit-scrollbar-track {
         background-clip: padding-box;
         background-color: transparent;
         border: 4px solid transparent;
-        border-radius: 8px
+        border-radius: 8px;
       }
 
       ::-webkit-scrollbar-thumb {
         background-clip: padding-box;
         background-color: #0000;
         border: 4px solid rgba(0, 0, 0, 0);
-        border-radius: 8px
+        border-radius: 8px;
       }
 
       :hover::-webkit-scrollbar-thumb {
-        background-color: #0000001a
+        background-color: #0000001a;
       }
 
       ::-webkit-scrollbar-thumb:hover {
-        background-color: #00000026
+        background-color: #00000026;
       }
 
       ::-webkit-scrollbar-button {
         display: none;
         height: 0;
-        width: 0
+        width: 0;
       }
 
       ::-webkit-scrollbar-corner {
-        background-color: transparent
+        background-color: transparent;
       }
 
-
-
-      input[type=text],
+      input[type='text'],
       textarea {
         background-color: unset;
         border: 1px solid var(--gray-3);
-        border-radius: .5rem;
-        color: var(--black)
+        border-radius: 0.5rem;
+        color: var(--black);
       }
 
-      input[type=text]::-moz-placeholder,
+      input[type='text']::-moz-placeholder,
       textarea::-moz-placeholder {
-        color: var(--gray-4)
+        color: var(--gray-4);
       }
 
-      input[type=text]::placeholder,
+      input[type='text']::placeholder,
       textarea::placeholder {
-        color: var(--gray-4)
+        color: var(--gray-4);
       }
 
-      input[type=text]:hover,
+      input[type='text']:hover,
       textarea:hover {
         background-color: unset;
-        border-color: var(--gray-4)
+        border-color: var(--gray-4);
       }
 
-      input[type=text]:focus-visible,
-      input[type=text]:focus,
+      input[type='text']:focus-visible,
+      input[type='text']:focus,
       textarea:focus-visible,
       textarea:focus {
         border-color: var(--purple);
-        outline: none
+        outline: none;
       }
 
       select {
@@ -335,40 +361,40 @@ const getCurrentHeadingLevel = () => {
         -moz-appearance: none;
         background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="Gray" d="M7 10l5 5 5-5z"/></svg>');
         background-repeat: no-repeat;
-        background-position: right .1rem center;
+        background-position: right 0.1rem center;
         background-size: 1.25rem 1.25rem;
-        padding-right: 1.25rem
+        padding-right: 1.25rem;
       }
 
       select:focus {
-        outline: 0
+        outline: 0;
       }
 
       form {
         align-items: flex-start;
         display: flex;
         flex-direction: column;
-        gap: .25rem
+        gap: 0.25rem;
       }
 
       .hint {
         align-items: center;
         background-color: var(--yellow-light);
-        border-radius: .5rem;
+        border-radius: 0.5rem;
         border: 1px solid var(--gray-2);
         display: flex;
         flex-direction: row;
-        font-size: .75rem;
-        gap: .25rem;
+        font-size: 0.75rem;
+        gap: 0.25rem;
         line-height: 1.15;
-        padding: .3rem .5rem
+        padding: 0.3rem 0.5rem;
       }
 
       .hint.purple-spinner,
       .hint.error {
         justify-content: center;
         text-align: center;
-        width: 100%
+        width: 100%;
       }
 
       .hint .badge {
@@ -376,68 +402,66 @@ const getCurrentHeadingLevel = () => {
         border: 1px solid var(--gray-3);
         border-radius: 2rem;
         color: var(--gray-5);
-        font-size: .625rem;
+        font-size: 0.625rem;
         font-weight: 700;
         line-height: 1;
-        padding: .25rem .5rem
+        padding: 0.25rem 0.5rem;
       }
 
       .hint.purple-spinner {
-        background-color: var(--purple-light)
+        background-color: var(--purple-light);
       }
 
       .hint.purple-spinner:after {
-        content: "";
+        content: '';
         background-image: url("data:image/svg+xml;utf8,<svg version='1.1' id='Layer_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' width='28px' height='30px' viewBox='0 0 24 30' style='enable-background:new 0 0 50 50;' xml:space='preserve'><rect x='0' y='10' width='6' height='10' fill='%236A00F5' rx='3' ry='3'><animateTransform attributeType='xml' attributeName='transform' type='translate' values='0 0; 0 5; 0 -5; 0 0' begin='0' dur='0.6s' repeatCount='indefinite'/></rect><rect x='10' y='10' width='6' height='10' fill='%236A00F5' rx='3' ry='3'><animateTransform attributeType='xml' attributeName='transform' type='translate' values='0 0; 0 5; 0 -5; 0 0' begin='0.2s' dur='0.6s' repeatCount='indefinite'/></rect><rect x='20' y='10' width='6' height='10' fill='%236A00F5' rx='3' ry='3'><animateTransform attributeType='xml' attributeName='transform' type='translate' values='0 0; 0 5; 0 -5; 0 0' begin='0.4s' dur='0.6s' repeatCount='indefinite'/></rect></svg>");
         background-size: cover;
         background-repeat: no-repeat;
         background-position: center;
         height: 1rem;
-        width: 1rem
+        width: 1rem;
       }
 
       .hint.error {
-        background-color: var(--red-light)
+        background-color: var(--red-light);
       }
 
       .label,
       .label-small,
       .label-large {
         color: var(--black);
-        font-size: .8125rem;
+        font-size: 0.8125rem;
         font-weight: 500;
-        line-height: 1.15
+        line-height: 1.15;
       }
 
       .label-small {
         color: var(--gray-5);
-        font-size: .75rem;
-        font-weight: 400
+        font-size: 0.75rem;
+        font-weight: 400;
       }
 
       .label-large {
-        font-size: .875rem;
-        font-weight: 700
+        font-size: 0.875rem;
+        font-weight: 700;
       }
 
       hr {
         border: none;
         border-top: 1px solid var(--gray-3);
         margin: 0;
-        width: 100%
+        width: 100%;
       }
 
       kbd {
         background-color: var(--gray-2);
         border: 1px solid var(--gray-2);
-        border-radius: .25rem;
-        font-size: .6rem;
+        border-radius: 0.25rem;
+        font-size: 0.6rem;
         line-height: 1.15;
-        padding: .1rem .25rem;
-        text-transform: uppercase
+        padding: 0.1rem 0.25rem;
+        text-transform: uppercase;
       }
-
-
 
       .flex-row {
         display: flex;
@@ -445,49 +469,49 @@ const getCurrentHeadingLevel = () => {
         flex-wrap: wrap;
         gap: 1rem;
         justify-content: space-between;
-        width: 100%
+        width: 100%;
       }
 
       .switch-group {
         align-items: center;
         background: var(--gray-2);
-        border-radius: .5rem;
+        border-radius: 0.5rem;
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
         flex: 0 1 auto;
         justify-content: flex-start;
-        padding: .125rem
+        padding: 0.125rem;
       }
 
       .switch-group label {
         align-items: center;
-        border-radius: .375rem;
+        border-radius: 0.375rem;
         color: var(--gray-5);
         cursor: pointer;
         display: flex;
         flex-direction: row;
-        font-size: .75rem;
+        font-size: 0.75rem;
         font-weight: 500;
-        gap: .25rem;
+        gap: 0.25rem;
         line-height: 1.15;
         min-height: 1.5rem;
-        padding: 0 .375rem;
-        transition: all .2s cubic-bezier(.65, .05, .36, 1)
+        padding: 0 0.375rem;
+        transition: all 0.2s cubic-bezier(0.65, 0.05, 0.36, 1);
       }
 
       .switch-group label:has(input:checked) {
         background-color: var(--white);
-        color: var(--black-contrast)
+        color: var(--black-contrast);
       }
 
       .switch-group label:hover {
-        color: var(--black)
+        color: var(--black);
       }
 
       .switch-group label input {
         display: none;
-        margin: unset
+        margin: unset;
       }
 
       .output-group {
@@ -495,27 +519,24 @@ const getCurrentHeadingLevel = () => {
         display: flex;
         flex-direction: column;
         font-family: JetBrainsMono, monospace;
-        font-size: .75rem;
+        font-size: 0.75rem;
         gap: 1rem;
         margin-top: 2.5rem;
-        padding: 1.5rem
+        padding: 1.5rem;
       }
 
       .output-group label {
         color: var(--black);
-        font-size: .875rem;
+        font-size: 0.875rem;
         font-weight: 700;
-        line-height: 1.15
+        line-height: 1.15;
       }
     }
 
     ::-webkit-scrollbar {
       height: 14px;
-      width: 14px
+      width: 14px;
     }
-
-
   }
-
 }
 </style>

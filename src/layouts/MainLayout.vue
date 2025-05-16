@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref, watch, computed } from 'vue';
+import type { Component } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 import { Menu as AMenu } from 'ant-design-vue';
 import { useI18n } from 'vue-i18n';
@@ -34,8 +35,15 @@ const headerStyles = computed(() => ({
   alignItems: 'center',
 }));
 
-// 动态构建菜单项，确保语言切换时菜单标签会更新
-const getMenuItems = () => [
+interface IMenuItem {
+  key: string;
+  icon?: Component;
+  label: string;
+  path?: string;
+  children?: IMenuItem[];
+}
+
+const defualtMenus: IMenuItem[] = [
   {
     key: 'home',
     icon: HomeOutlined,
@@ -125,13 +133,13 @@ const getMenuItems = () => [
   },
 ];
 
-const menuItems = ref(getMenuItems());
+const menuItems = ref([...defualtMenus]);
 
 // 监听语言变化，更新菜单项
 watch(
   () => appStore.locale,
   () => {
-    menuItems.value = getMenuItems();
+    menuItems.value = [...defualtMenus];
   },
 );
 
@@ -152,7 +160,7 @@ const flashMenu = (key: string) => {
 watch(
   () => route.path,
   (path) => {
-    const findMenuKey = (items: any[], path: string): string | undefined => {
+    const findMenuKey = (items: IMenuItem[], path: string): string | undefined => {
       for (const item of items) {
         if (item.path === path) return item.key;
         if (item.children) {
@@ -175,7 +183,7 @@ watch(
 );
 
 const handleMenuClick = (key: string) => {
-  const findPath = (items: any[]): string | undefined => {
+  const findPath = (items: IMenuItem[]): string | undefined => {
     for (const item of items) {
       if (item.key === key) return item.path;
       if (item.children) {

@@ -19,8 +19,8 @@ const i18n = createI18n({
   locale: 'zh',
   messages: {
     en,
-    zh
-  }
+    zh,
+  },
 });
 
 const app = createApp(App);

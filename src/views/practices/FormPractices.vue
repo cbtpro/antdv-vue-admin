@@ -5,9 +5,10 @@ import { message } from 'ant-design-vue';
 import StickyFooterLayout from '@/components/StickyFooterLayout.vue';
 import RichEditor from '@/components/RichEditor.vue';
 import RichEditorInline from '@/components/RichEditorInline.vue';
+import type { Rule } from 'ant-design-vue/es/form';
 
 defineOptions({
-  name: 'PageFormPractices'
+  name: 'PageFormPractices',
 });
 const formRef = ref<FormInstance>();
 const formLayout = ref<'horizontal' | 'vertical' | 'inline'>('horizontal');
@@ -22,47 +23,47 @@ const formState = reactive({
   gender: undefined,
   interests: [],
   introduction: '',
-  agreement: false
+  agreement: false,
 });
 
 const rules = {
   username: [
     { required: true, message: '请输入用户名' },
-    { min: 4, message: '用户名至少4个字符' }
+    { min: 4, message: '用户名至少4个字符' },
   ],
   password: [
     { required: true, message: '请输入密码' },
-    { min: 6, message: '密码至少6个字符' }
+    { min: 6, message: '密码至少6个字符' },
   ],
   confirmPassword: [
     { required: true, message: '请确认密码' },
     {
-      validator: async (_rule: any, value: string) => {
+      validator: async (_rule: Rule, value: string) => {
         if (value !== formState.password) {
           throw new Error('两次输入的密码不一致');
         }
-      }
-    }
+      },
+    },
   ],
   email: [
     { required: true, message: '请输入邮箱' },
-    { type: 'email', message: '请输入有效的邮箱地址' }
+    { type: 'email', message: '请输入有效的邮箱地址' },
   ],
   phone: [
     { required: true, message: '请输入手机号' },
-    { pattern: /^1[3-9]\d{9}$/, message: '请输入有效的手机号', }
+    { pattern: /^1[3-9]\d{9}$/, message: '请输入有效的手机号' },
   ],
   gender: [{ required: true, message: '请选择性别' }],
-  introduction: [{ required: true, message: '请输入个人简介', }],
+  introduction: [{ required: true, message: '请输入个人简介' }],
   agreement: [
     {
-      validator: async (_rule: any, value: boolean) => {
+      validator: async (_rule: Rule, value: boolean) => {
         if (!value) {
           throw new Error('请同意用户协议');
         }
-      }
-    }
-  ]
+      },
+    },
+  ],
 };
 
 const handleSubmit = async () => {
@@ -81,9 +82,7 @@ const handleReset = () => {
 
 const boundingInfoOptions = { prefix: '--bounding-info-' };
 
-const toggleIntroductionVisible = () => {
-
-};
+const toggleIntroductionVisible = () => {};
 </script>
 
 <template>
@@ -100,9 +99,14 @@ const toggleIntroductionVisible = () => {
           </a-space>
         </template>
 
-        <a-form ref="formRef" :model="formState" :rules="rules" :layout="formLayout"
+        <a-form
+          ref="formRef"
+          :model="formState"
+          :rules="rules"
+          :layout="formLayout"
           :label-col="formLayout === 'horizontal' ? { span: 4 } : null"
-          :wrapper-col="formLayout === 'horizontal' ? { span: 14 } : null">
+          :wrapper-col="formLayout === 'horizontal' ? { span: 14 } : null"
+        >
           <a-form-item label="用户名" name="username">
             <a-input v-model:value="formState.username" />
           </a-form-item>
@@ -145,12 +149,22 @@ const toggleIntroductionVisible = () => {
 
           <a-form-item label="个人简介" name="introduction" @click="toggleIntroductionVisible">
             <!-- <a-textarea v-model:value="formState.introduction" :rows="4" placeholder="请输入个人简介" /> -->
-            <RichEditorInline v-if="formLayout === 'inline'" v-model:value="formState.introduction"
-              placeholder="请输入个人简介" />
-            <RichEditor v-else v-model:value="formState.introduction" placeholder="请输入个人简介" />
+            <RichEditorInline
+              v-if="formLayout === 'inline'"
+              v-model:value="formState.introduction"
+              placeholder="请输入个人简介"
+            />
+            <RichEditor
+              v-else
+              v-model:value="formState.introduction"
+              placeholder="请输入个人简介"
+            />
           </a-form-item>
 
-          <a-form-item name="agreement" :wrapper-col="{ offset: formLayout === 'horizontal' ? 4 : 0 }">
+          <a-form-item
+            name="agreement"
+            :wrapper-col="{ offset: formLayout === 'horizontal' ? 4 : 0 }"
+          >
             <a-checkbox v-model:checked="formState.agreement">
               我已阅读并同意
               <a href="#" @click.prevent>用户协议</a>
@@ -165,7 +179,6 @@ const toggleIntroductionVisible = () => {
             <a-button @click="handleReset">重置</a-button>
           </a-space>
         </div>
-
       </template>
     </StickyFooterLayout>
   </div>
