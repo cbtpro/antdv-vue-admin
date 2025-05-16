@@ -2,27 +2,39 @@
   <a-card title="自定义表单控件">
     <a-form :model="formState" @finish="onFinish" layout="vertical">
       <a-form-item label="评分" name="rating">
-        <div class="custom-rating">
-          <a-rate v-model:value="formState.rating" />
-          <span class="rating-text">{{ ratingTexts[formState.rating - 1] || '请评分' }}</span>
-        </div>
+        <a-rate v-model:value="formState.rating" />
+        <span class="rating-text">{{ ratingTexts[formState.rating - 1] || '请评分' }}</span>
       </a-form-item>
 
       <a-form-item label="价格范围" name="priceRange">
-        <div class="price-range">
-          <a-slider v-model:value="formState.priceRange" range :min="0" :max="1000" :step="10" />
-          <div class="price-inputs">
-            <a-input-number v-model:value="formState.priceRange[0]" :min="0" :max="formState.priceRange[1]" />
-            <span class="separator">-</span>
-            <a-input-number v-model:value="formState.priceRange[1]" :min="formState.priceRange[0]" :max="1000" />
+        <a-form-item-rest>
+          <div class="price-range">
+            <a-slider v-model:value="formState.priceRange" range :min="0" :max="1000" :step="10" />
+            <div class="price-inputs">
+              <a-input-number
+                v-model:value="formState.priceRange[0]"
+                :min="0"
+                :max="formState.priceRange[1]"
+              />
+              <span class="separator">-</span>
+              <a-input-number
+                v-model:value="formState.priceRange[1]"
+                :min="formState.priceRange[0]"
+                :max="1000"
+              />
+            </div>
           </div>
-        </div>
+        </a-form-item-rest>
       </a-form-item>
 
       <a-form-item label="标签选择" name="tags">
         <div class="tag-selector">
-          <a-tag v-for="tag in availableTags" :key="tag" :class="{ selected: formState.tags.includes(tag) }"
-            @click="toggleTag(tag)">
+          <a-tag
+            v-for="tag in availableTags"
+            :key="tag"
+            :class="{ selected: formState.tags.includes(tag) }"
+            @click="toggleTag(tag)"
+          >
             {{ tag }}
           </a-tag>
         </div>
@@ -30,8 +42,14 @@
 
       <a-form-item label="颜色选择" name="color">
         <div class="color-picker">
-          <div v-for="color in colors" :key="color" class="color-item" :style="{ backgroundColor: color }"
-            :class="{ selected: formState.color === color }" @click="selectColor(color)" />
+          <div
+            v-for="color in colors"
+            :key="color"
+            class="color-item"
+            :style="{ backgroundColor: color }"
+            :class="{ selected: formState.color === color }"
+            @click="selectColor(color)"
+          />
         </div>
       </a-form-item>
 
@@ -56,7 +74,7 @@ const formState = reactive<IFormState>({
   rating: 0,
   priceRange: [0, 500],
   tags: [],
-  color: ''
+  color: '',
 });
 
 const ratingTexts = ['很差', '差', '一般', '好', '很好'];
@@ -78,7 +96,7 @@ const selectColor = (color: string) => {
   formState.color = color;
 };
 
-const onFinish = (values: any) => {
+const onFinish = (values: IFormState) => {
   console.log('表单数据:', values);
   message.success('提交成功！');
 };
@@ -144,6 +162,8 @@ const onFinish = (values: any) => {
 }
 
 .color-item.selected {
-  box-shadow: 0 0 0 2px #fff, 0 0 0 4px #1890ff;
+  box-shadow:
+    0 0 0 2px #fff,
+    0 0 0 4px #1890ff;
 }
 </style>

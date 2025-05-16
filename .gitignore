@@ -29,5 +29,7 @@ coverage
 
 *.tsbuildinfo
 
+.history
+
 test-results/
 playwright-report/

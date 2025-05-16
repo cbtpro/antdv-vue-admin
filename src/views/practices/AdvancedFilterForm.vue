@@ -77,34 +77,41 @@ const formState = reactive({
   status: undefined,
   dateRange: [],
   tags: [],
-  sort: undefined
+  sort: undefined,
 });
 
+interface IDataSource {
+  key: string;
+  name: string;
+  type: string;
+  status: string;
+  tags: string[];
+}
 const columns = [
   { title: '名称', dataIndex: 'name', key: 'name' },
   { title: '类型', dataIndex: 'type', key: 'type' },
   { title: '状态', dataIndex: 'status', key: 'status' },
-  { title: '标签', dataIndex: 'tags', key: 'tags' }
+  { title: '标签', dataIndex: 'tags', key: 'tags' },
 ];
 
-const dataSource = ref([
+const dataSource = ref<IDataSource[]>([
   {
     key: '1',
     name: '示例数据1',
     type: '类型一',
     status: '活跃',
-    tags: ['标签一', '标签二']
+    tags: ['标签一', '标签二'],
   },
   {
     key: '2',
     name: '示例数据2',
     type: '类型二',
     status: '不活跃',
-    tags: ['标签三']
-  }
+    tags: ['标签三'],
+  },
 ]);
 
-const onFinish = values => {
+const onFinish = (values: IDataSource) => {
   console.log('筛选条件:', values);
   message.success('查询成功！');
 };

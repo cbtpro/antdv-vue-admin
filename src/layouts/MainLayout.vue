@@ -9,7 +9,7 @@ import {
   InfoCircleOutlined,
   SettingOutlined,
   MenuFoldOutlined,
-  MenuUnfoldOutlined
+  MenuUnfoldOutlined,
 } from '@ant-design/icons-vue';
 import TabsView from '@/components/TabsView.vue';
 import HeaderActions from '@/components/HeaderActions.vue';
@@ -31,7 +31,7 @@ const headerStyles = computed(() => ({
   borderBottom: `1px solid ${appStore.theme === 'dark' ? '#303030' : '#f0f0f0'}`,
   display: 'flex',
   justifyContent: 'space-between',
-  alignItems: 'center'
+  alignItems: 'center',
 }));
 
 // 动态构建菜单项，确保语言切换时菜单标签会更新
@@ -40,7 +40,7 @@ const getMenuItems = () => [
     key: 'home',
     icon: HomeOutlined,
     label: t('menu.home'),
-    path: '/'
+    path: '/',
   },
   {
     key: 'practices',
@@ -50,7 +50,7 @@ const getMenuItems = () => [
       {
         key: 'related-form',
         label: t('menu.related-form'),
-        path: '/practices/related-form'
+        path: '/practices/related-form',
       },
       // {
       //   key: 'dynamic-form',
@@ -65,7 +65,7 @@ const getMenuItems = () => [
       {
         key: 'form',
         label: t('menu.form'),
-        path: '/practices/form'
+        path: '/practices/form',
       },
       {
         key: 'base-form',
@@ -93,29 +93,36 @@ const getMenuItems = () => [
         path: '/practices/advanced-filter',
       },
       {
+        key: 'complex-filter',
+        label: '复杂搜索表单',
+        path: '/practices/complex-filter',
+      },
+
+      {
         key: 'table',
         label: '表格表单',
         path: '/practices/table',
       },
+
       {
         key: 'custom',
         label: '自定义表单',
         path: '/practices/custom',
-      }
-    ]
+      },
+    ],
   },
   {
     key: 'about',
     icon: InfoCircleOutlined,
     label: t('menu.about'),
-    path: '/about'
+    path: '/about',
   },
   {
     key: 'settings',
     icon: SettingOutlined,
     label: t('menu.settings'),
-    path: '/settings'
-  }
+    path: '/settings',
+  },
 ];
 
 const menuItems = ref(getMenuItems());
@@ -125,7 +132,7 @@ watch(
   () => appStore.locale,
   () => {
     menuItems.value = getMenuItems();
-  }
+  },
 );
 
 const flashTimer = ref<number | null>(null);
@@ -144,7 +151,7 @@ const flashMenu = (key: string) => {
 // 监听路由变化，更新选中的菜单项
 watch(
   () => route.path,
-  path => {
+  (path) => {
     const findMenuKey = (items: any[], path: string): string | undefined => {
       for (const item of items) {
         if (item.path === path) return item.key;
@@ -164,7 +171,7 @@ watch(
       selectedKeys.value = [key];
     }
   },
-  { immediate: true }
+  { immediate: true },
 );
 
 const handleMenuClick = (key: string) => {
@@ -190,8 +197,13 @@ const handleMenuClick = (key: string) => {
   <a-layout style="height: 100vh" :class="appStore.theme">
     <a-layout-sider v-model:collapsed="collapsed" collapsible :theme="appStore.theme">
       <div class="logo" :class="appStore.theme" />
-      <a-menu v-model:selectedKeys="selectedKeys" v-model:openKeys="openKeys" :theme="appStore.theme" mode="inline"
-        @select="({ key }) => handleMenuClick(key as string)">
+      <a-menu
+        v-model:selectedKeys="selectedKeys"
+        v-model:openKeys="openKeys"
+        :theme="appStore.theme"
+        mode="inline"
+        @select="({ key }) => handleMenuClick(key as string)"
+      >
         <template v-for="item in menuItems" :key="item.key">
           <template v-if="item.children">
             <a-sub-menu :key="item.key">
@@ -217,12 +229,16 @@ const handleMenuClick = (key: string) => {
     </a-layout-sider>
     <a-layout>
       <a-layout-header :style="headerStyles" class="header">
-        <menu-unfold-outlined v-if="collapsed" class="trigger" @click="() => (collapsed = !collapsed)" />
+        <menu-unfold-outlined
+          v-if="collapsed"
+          class="trigger"
+          @click="() => (collapsed = !collapsed)"
+        />
         <menu-fold-outlined v-else class="trigger" @click="() => (collapsed = !collapsed)" />
         <HeaderActions />
       </a-layout-header>
       <TabsView />
-      <a-layout-content style="overflow: auto;">
+      <a-layout-content style="overflow: auto">
         <router-view></router-view>
       </a-layout-content>
       <a-layout-footer>Ant Design Vue ©2024 Created by Ant UED</a-layout-footer>

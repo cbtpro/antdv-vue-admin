@@ -46,26 +46,32 @@
 import { ref, reactive } from 'vue';
 import { message } from 'ant-design-vue';
 
+interface IDataSource {
+  key: string;
+  name: string;
+  age: number;
+  address: string;
+}
 const columns = [
   { title: '姓名', dataIndex: 'name', width: '25%' },
   { title: '年龄', dataIndex: 'age', width: '15%' },
   { title: '地址', dataIndex: 'address', width: '40%' },
-  { title: '操作', dataIndex: 'operation', width: '20%' }
+  { title: '操作', dataIndex: 'operation', width: '20%' },
 ];
 
-const dataSource = ref([
+const dataSource = ref<IDataSource[]>([
   { key: '1', name: '张三', age: 32, address: '北京市朝阳区' },
-  { key: '2', name: '李四', age: 28, address: '上海市浦东新区' }
+  { key: '2', name: '李四', age: 28, address: '上海市浦东新区' },
 ]);
 
 const editingKey = ref('');
 const editingRow = reactive({
   name: '',
   age: 0,
-  address: ''
+  address: '',
 });
 
-const editRow = (record) => {
+const editRow = (record: IDataSource) => {
   editingKey.value = record.key;
   Object.assign(editingRow, record);
 };
@@ -74,15 +80,15 @@ const cancelEdit = () => {
   editingKey.value = '';
 };
 
-const saveRow = (key) => {
-  const index = dataSource.value.findIndex(item => item.key === key);
+const saveRow = (key: string) => {
+  const index = dataSource.value.findIndex((item) => item.key === key);
   Object.assign(dataSource.value[index], editingRow);
   editingKey.value = '';
   message.success('保存成功！');
 };
 
-const deleteRow = (key) => {
-  dataSource.value = dataSource.value.filter(item => item.key !== key);
+const deleteRow = (key: string) => {
+  dataSource.value = dataSource.value.filter((item) => item.key !== key);
   message.success('删除成功！');
 };
 
@@ -92,7 +98,7 @@ const addRow = () => {
     key: newKey,
     name: `新员工 ${newKey}`,
     age: 25,
-    address: ''
+    address: '',
   });
 };
 </script>

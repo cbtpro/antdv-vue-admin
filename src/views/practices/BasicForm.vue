@@ -35,24 +35,28 @@
 import { reactive } from 'vue';
 import { message } from 'ant-design-vue';
 
+interface IFormState {
+  username: string;
+  email: string;
+}
 const formState = reactive({
   username: '',
   email: '',
   gender: 'male',
-  hobbies: []
+  hobbies: [],
 });
 
 const rules = {
   username: [{ required: true, message: '请输入用户名' }],
   email: [
     { required: true, message: '请输入邮箱' },
-    { type: 'email', message: '请输入有效的邮箱地址' }
+    { type: 'email', message: '请输入有效的邮箱地址' },
   ],
   gender: [{ required: true, message: '请选择性别' }],
-  hobbies: [{ required: true, message: '请选择至少一个兴趣爱好' }]
+  hobbies: [{ required: true, message: '请选择至少一个兴趣爱好' }],
 };
 
-const onFinish = values => {
+const onFinish = (values: IFormState) => {
   console.log('表单数据:', values);
   message.success('提交成功！');
 };
