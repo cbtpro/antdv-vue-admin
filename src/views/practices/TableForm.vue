@@ -46,6 +46,10 @@
 import { ref, reactive } from 'vue';
 import { message } from 'ant-design-vue';
 
+defineOptions({
+  name: 'TableForm',
+});
+
 interface IDataSource {
   key: string;
   name: string;

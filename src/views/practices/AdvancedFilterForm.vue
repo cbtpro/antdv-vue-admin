@@ -71,6 +71,8 @@
 import { reactive, ref } from 'vue';
 import { message } from 'ant-design-vue';
 
+defineOptions({ name: 'AdvancedFilterForm' });
+
 const formState = reactive({
   name: '',
   type: undefined,

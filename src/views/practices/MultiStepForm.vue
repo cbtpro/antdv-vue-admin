@@ -55,17 +55,21 @@
 import { reactive, ref } from 'vue';
 import { Result } from 'ant-design-vue';
 
+defineOptions({
+  name: 'MultiStepForm',
+});
+
 const currentStep = ref(0);
 
 const formState = reactive({
   step1: {
     name: '',
-    age: null
+    age: null,
   },
   step2: {
     phone: '',
-    address: ''
-  }
+    address: '',
+  },
 });
 
 const nextStep = () => {

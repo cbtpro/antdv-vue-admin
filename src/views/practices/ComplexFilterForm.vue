@@ -177,6 +177,8 @@ import {
   // DragOutlined,
 } from '@ant-design/icons-vue';
 
+defineOptions({ name: 'ComplexFilterForm' });
+
 interface ISearchFormState {
   name: string;
   type: string | null;
@@ -332,7 +334,11 @@ interface ITableChangeParams {
     order: string;
   };
 }
-const handleTableChange = (pagination: ITableChangeParams['pagination'], filters, sorter) => {
+const handleTableChange = (
+  pagination: ITableChangeParams['pagination'],
+  filters: ITableChangeParams['filters'],
+  sorter: ITableChangeParams['sorter'],
+) => {
   debugger;
   console.log('page:', pagination);
   console.log('filters:', filters);

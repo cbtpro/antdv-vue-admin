@@ -12,8 +12,9 @@ import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
 } from '@ant-design/icons-vue';
-import TabsView from '@/components/TabsView.vue';
+import Tabs from '@/components/Tabs.vue';
 import HeaderActions from '@/components/HeaderActions.vue';
+import KeepAliveTabsViewer from '@/components/KeepAliveTabsViewer.vue';
 import { useAppStore } from '@/stores/app';
 // import { SelectInfo } from 'ant-design-vue/es/menu/src/interface';
 
@@ -245,9 +246,10 @@ const handleMenuClick = (key: string) => {
         <menu-fold-outlined v-else class="trigger" @click="() => (collapsed = !collapsed)" />
         <HeaderActions />
       </a-layout-header>
-      <TabsView />
+      <Tabs />
       <a-layout-content style="overflow: auto">
-        <router-view></router-view>
+        <!-- <router-view></router-view> -->
+        <KeepAliveTabsViewer />
       </a-layout-content>
       <a-layout-footer>Ant Design Vue ©2024 Created by Ant UED</a-layout-footer>
     </a-layout>

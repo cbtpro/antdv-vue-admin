@@ -35,6 +35,8 @@ import { reactive } from 'vue';
 import { PlusOutlined, MinusCircleOutlined } from '@ant-design/icons-vue';
 import { message } from 'ant-design-vue';
 
+defineOptions({ name: 'DynamicForm' });
+
 const formState = reactive({
   fields: [{ value: '' }],
 });

@@ -35,6 +35,8 @@
 import { reactive } from 'vue';
 import { message } from 'ant-design-vue';
 
+defineOptions({ name: 'BasicForm' });
+
 interface IFormState {
   username: string;
   email: string;

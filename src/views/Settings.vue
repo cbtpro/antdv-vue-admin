@@ -1,6 +1,10 @@
 <script setup lang="ts">
 import { useTabStore } from '@/stores/tabs';
 
+defineOptions({
+  name: 'AppSettings',
+});
+
 const tabStore = useTabStore();
 
 const handleSettingChange = () => {

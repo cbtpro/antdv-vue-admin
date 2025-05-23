@@ -10,6 +10,7 @@ import type { Rule } from 'ant-design-vue/es/form';
 defineOptions({
   name: 'PageFormPractices',
 });
+
 const formRef = ref<FormInstance>();
 const formLayout = ref<'horizontal' | 'vertical' | 'inline'>('horizontal');
 

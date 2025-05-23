@@ -50,10 +50,14 @@ import { reactive, ref } from 'vue';
 import { SearchOutlined } from '@ant-design/icons-vue';
 import { message } from 'ant-design-vue';
 
+defineOptions({
+  name: 'SearchForm',
+});
+
 const formState = reactive({
   keyword: '',
   category: undefined,
-  dateRange: []
+  dateRange: [],
 });
 
 const loading = ref(false);
@@ -63,38 +67,38 @@ const searchResults = ref([
     title: '示例文章1',
     category: '技术',
     date: '2025-01-01',
-    views: 100
+    views: 100,
   },
   {
     key: '2',
     title: '示例文章2',
     category: '设计',
     date: '2025-01-02',
-    views: 200
-  }
+    views: 200,
+  },
 ]);
 
 const columns = [
   {
     title: '标题',
     dataIndex: 'title',
-    key: 'title'
+    key: 'title',
   },
   {
     title: '分类',
     dataIndex: 'category',
-    key: 'category'
+    key: 'category',
   },
   {
     title: '发布日期',
     dataIndex: 'date',
-    key: 'date'
+    key: 'date',
   },
   {
     title: '浏览量',
     dataIndex: 'views',
-    key: 'views'
-  }
+    key: 'views',
+  },
 ];
 
 const onSearch = () => {

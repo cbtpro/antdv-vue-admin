@@ -19,9 +19,13 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, watch } from "vue";
-import { message } from "ant-design-vue";
-import type { FormInstance, Rule } from "ant-design-vue/es/form";
+import { ref, watch } from 'vue';
+import { message } from 'ant-design-vue';
+import type { FormInstance, Rule } from 'ant-design-vue/es/form';
+
+defineOptions({
+  name: 'RelatedFormPractices',
+});
 
 interface IFormState {
   a: number | null;
@@ -36,7 +40,7 @@ const form = ref<IFormState>({
 });
 
 const divisorRules = [
-  { required: true, message: "请输入除数" },
+  { required: true, message: '请输入除数' },
   {
     validator: (rule: Rule, value: number) => {
       if (value === 0) {
@@ -52,7 +56,7 @@ watch([() => form.value.a, () => form.value.b], ([newA, newB]) => {
     return;
   }
   form.value.c = (newA ?? 0) / newB; // 计算 C 的值
-  formRef.value?.validateFields(["c"]); // 触发 C 的校验
+  formRef.value?.validateFields(['c']); // 触发 C 的校验
 });
 
 // 提交表单
@@ -63,10 +67,10 @@ const submitForm = () => {
   formRef.value
     .validate()
     .then(() => {
-      message.success("提交成功！");
+      message.success('提交成功！');
     })
     .catch(() => {
-      message.error("请检查表单");
+      message.error('请检查表单');
     });
 };
 </script>

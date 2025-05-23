@@ -2,9 +2,9 @@
 import { ref, onMounted, onBeforeUnmount, watch, computed } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 import { useTabStore } from '@/stores/tabs';
+import type { TabItem } from '@/stores/tabs';
 import { useAppStore } from '@/stores/app';
 import { PushpinOutlined } from '@ant-design/icons-vue';
-import type { TabItem } from '@/stores/tabs';
 
 const router = useRouter();
 const route = useRoute();
@@ -19,29 +19,28 @@ const currentTab = ref<TabItem | null>(null);
 // 主题相关样式
 const tabsContainerStyle = computed(() => ({
   background: appStore.theme === 'dark' ? '#1f1f1f' : '#fff',
-  borderBottom: `1px solid ${appStore.theme === 'dark' ? '#303030' : '#f0f0f0'}`
+  borderBottom: `1px solid ${appStore.theme === 'dark' ? '#303030' : '#f0f0f0'}`,
 }));
 
 const contextMenuStyle = computed(() => ({
   background: appStore.theme === 'dark' ? '#1f1f1f' : '#fff',
-  boxShadow: appStore.theme === 'dark' ? '0 2px 8px rgba(0, 0, 0, 0.45)' : '0 2px 8px rgba(0, 0, 0, 0.15)',
-  border: `1px solid ${appStore.theme === 'dark' ? '#303030' : '#f0f0f0'}`
+  boxShadow:
+    appStore.theme === 'dark' ? '0 2px 8px rgba(0, 0, 0, 0.45)' : '0 2px 8px rgba(0, 0, 0, 0.15)',
+  border: `1px solid ${appStore.theme === 'dark' ? '#303030' : '#f0f0f0'}`,
 }));
 
 // 监听路由变化,添加标签页
 watch(
-  () => route.name,
+  route,
   () => {
-    if (route.name) {
-      tabStore.addTab(route);
-    }
+    tabStore.addTab(route);
   },
-  { immediate: true }
+  { immediate: true },
 );
 
 // 处理标签页点击
 const handleTabClick = (key: string) => {
-  const tab = tabStore.tabs.find(tab => tab.key === key);
+  const tab = tabStore.tabs.find((tab) => tab.key === key);
   if (tab) {
     router.push(tab.path);
   }
@@ -52,7 +51,7 @@ const handleTabClose = (key: string) => {
   tabStore.removeTab(key);
   // 如果关闭的是当前标签页,需要跳转到其他标签页
   if (route.name === key) {
-    const activeTab = tabStore.tabs.find(tab => tab.key === tabStore.activeTab);
+    const activeTab = tabStore.tabs.find((tab) => tab.key === tabStore.activeTab);
     if (activeTab) {
       router.push(activeTab.path);
     }
@@ -65,14 +64,19 @@ const handleTabEdit = (targetKey: string, action: string) => {
   }
 };
 
+const showPinButton = ref(false);
 // 右键菜单相关
 const showContextMenu = (e: MouseEvent, tab: TabItem) => {
   e.preventDefault();
   e.stopPropagation();
+  if (tabStore.tabs.length === 1) {
+    return;
+  }
+  showPinButton.value = tab.key !== 'home';
   contextMenuVisible.value = true;
   contextMenuPosition.value = {
     x: e.clientX,
-    y: e.clientY
+    y: e.clientY,
   };
   currentContextTab.value = tab.key;
   currentTab.value = tab;
@@ -134,13 +138,26 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <div class="tabs-view-container" :class="appStore.theme" :style="tabsContainerStyle"
-    @contextmenu="preventContextMenu">
-    <a-tabs v-model:activeKey="tabStore.activeTab" type="editable-card" hide-add @tabClick="handleTabClick"
-      @edit="handleTabEdit">
-      <a-tab-pane v-for="tab in tabStore.tabs" :key="tab.key" :closable="!tab.fixed && tab.key !== 'home'">
+  <div
+    class="tabs-view-container"
+    :class="appStore.theme"
+    :style="tabsContainerStyle"
+    @contextmenu="preventContextMenu"
+  >
+    <a-tabs
+      v-model:activeKey="tabStore.activeTab"
+      type="editable-card"
+      hide-add
+      @tabClick="handleTabClick"
+      @edit="handleTabEdit"
+    >
+      <a-tab-pane
+        v-for="tab in tabStore.tabs"
+        :key="tab.key"
+        :closable="!tab.fixed && tab.key !== 'home'"
+      >
         <template #tab>
-          <div class="tab-label" @contextmenu.prevent.stop="e => showContextMenu(e, tab)">
+          <div class="tab-label" @contextmenu.prevent.stop="(e) => showContextMenu(e, tab)">
             {{ tab.title }}
             <PushpinOutlined v-if="tab.fixed" />
           </div>
@@ -149,17 +166,24 @@ onBeforeUnmount(() => {
     </a-tabs>
 
     <!-- 右键菜单 -->
-    <div v-if="contextMenuVisible" class="context-menu" :style="{
-      left: `${contextMenuPosition.x}px`,
-      top: `${contextMenuPosition.y}px`,
-      ...contextMenuStyle
-    }">
+    <div
+      v-if="contextMenuVisible"
+      class="context-menu"
+      :style="{
+        left: `${contextMenuPosition.x}px`,
+        top: `${contextMenuPosition.y}px`,
+        ...contextMenuStyle,
+      }"
+    >
       <a-menu :theme="appStore.theme">
         <a-menu-item @click="handleContextMenuClick('closeAll')">关闭所有</a-menu-item>
         <a-menu-item @click="handleContextMenuClick('closeOthers')">关闭其他</a-menu-item>
         <a-menu-item @click="handleContextMenuClick('closeRight')">关闭右侧</a-menu-item>
         <a-menu-item @click="handleContextMenuClick('closeLeft')">关闭左侧</a-menu-item>
-        <a-menu-item @click="handleContextMenuClick(currentTab?.fixed ? 'unpin' : 'pin')">
+        <a-menu-item
+          v-if="showPinButton"
+          @click="handleContextMenuClick(currentTab?.fixed ? 'unpin' : 'pin')"
+        >
           {{ currentTab?.fixed ? '取消锚定' : '锚定' }}
         </a-menu-item>
       </a-menu>

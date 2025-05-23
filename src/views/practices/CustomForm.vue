@@ -64,6 +64,8 @@
 import { reactive } from 'vue';
 import { message } from 'ant-design-vue';
 
+defineOptions({ name: 'CustomForm' });
+
 interface IFormState {
   rating: number;
   priceRange: [number, number];
