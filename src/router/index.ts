@@ -95,6 +95,12 @@ const router = createRouter({
               component: () => import('@/views/practices/CustomForm.vue'),
               meta: { title: '自定义表单' },
             },
+            {
+              path: 'use-form',
+              name: 'use-form',
+              component: () => import('@/views/practices/UseFormDemo.vue'),
+              meta: { title: 'useForm表单' },
+            },
           ],
         },
         {

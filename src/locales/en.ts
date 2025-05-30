@@ -6,23 +6,24 @@ export default {
     'related-form': 'Related Form Practices',
     'dynamic-form': 'Dynamic Form Practices',
     stepForm: 'Step Form',
+    useForm: 'useForm',
     about: 'About',
-    settings: 'Settings'
+    settings: 'Settings',
   },
   header: {
     theme: {
       light: 'Light',
-      dark: 'Dark'
+      dark: 'Dark',
     },
     profile: {
       settings: 'Settings',
-      logout: 'Logout'
-    }
+      logout: 'Logout',
+    },
   },
   settings: {
     title: 'System Settings',
     tabs: {
-      restore: 'Restore tabs when reopening the page'
-    }
-  }
+      restore: 'Restore tabs when reopening the page',
+    },
+  },
 };

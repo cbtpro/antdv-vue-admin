@@ -112,11 +112,15 @@ const defualtMenus: IMenuItem[] = [
         label: '表格表单',
         path: '/practices/table',
       },
-
       {
         key: 'custom',
         label: '自定义表单',
         path: '/practices/custom',
+      },
+      {
+        key: 'useForm',
+        label: 'useForm',
+        path: '/practices/use-form',
       },
     ],
   },
