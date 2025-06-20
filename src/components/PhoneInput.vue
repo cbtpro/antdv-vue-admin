@@ -19,8 +19,8 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, watch } from 'vue'
-import { isValidPhoneNumber, parsePhoneNumberFromString, getCountries, getCountryCallingCode } from 'libphonenumber-js'
+import { ref } from 'vue';
+import { parsePhoneNumberFromString } from 'libphonenumber-js';
 
 // 国家列表（可按需裁剪）
 const countryOptions = [
@@ -29,29 +29,29 @@ const countryOptions = [
   { code: 'GB', name: '英国', dialCode: '+44' },
   { code: 'IN', name: '印度', dialCode: '+91' },
   // ...更多国家
-]
+];
 
-const selectedCountry = ref('CN')
-const phone = ref('')
-const error = ref('')
+const selectedCountry = ref('CN');
+const phone = ref('');
+const error = ref('');
 
 const validatePhone = () => {
-  const dialCode = countryOptions.find(c => c.code === selectedCountry.value)?.dialCode || ''
-  const fullNumber = `${dialCode}${phone.value}`
+  const dialCode = countryOptions.find((c) => c.code === selectedCountry.value)?.dialCode || '';
+  const fullNumber = `${dialCode}${phone.value}`;
 
-  const parsed = parsePhoneNumberFromString(fullNumber)
+  const parsed = parsePhoneNumberFromString(fullNumber);
   if (!parsed || !parsed.isValid()) {
-    error.value = '手机号格式不正确'
+    error.value = '手机号格式不正确';
   } else {
-    error.value = ''
+    error.value = '';
     // 你可以在这里 emit 或调用回调函数，将合法格式的号码传出去
-    console.log('合法号码：', parsed.number) // E.164 格式，如 +8613800000000
+    console.log('合法号码：', parsed.number); // E.164 格式，如 +8613800000000
   }
-}
+};
 
 const onCountryChange = () => {
-  error.value = ''
-}
+  error.value = '';
+};
 </script>
 
 <style scoped>

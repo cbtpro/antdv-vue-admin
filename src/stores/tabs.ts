@@ -12,11 +12,11 @@ export interface TabItem {
 
 export const useTabStore = defineStore('tabs', () => {
   const tabs = ref<TabItem[]>([
-    { key: 'home', title: '首页', path: '/', closable: false, fixed: false }
+    { key: 'home', title: '首页', path: '/', closable: false, fixed: false },
   ]);
   const activeTab = ref('home');
   const settings = ref({
-    restoreTabs: true
+    restoreTabs: true,
   });
 
   const addTab = (route: RouteLocationNormalized) => {
@@ -24,61 +24,61 @@ export const useTabStore = defineStore('tabs', () => {
     if (!name) return;
 
     const key = name as string;
-    const title = meta?.title as string ?? '未知标题';
-    if (!tabs.value.some(tab => tab.key === key)) {
+    const title = (meta?.title as string) ?? '未知标题';
+    if (!tabs.value.some((tab) => tab.key === key)) {
       tabs.value.push({
         key,
         title,
         path,
         closable: key !== 'home',
-        fixed: false
+        fixed: false,
       });
     }
     activeTab.value = key;
   };
 
   const removeTab = (key: string) => {
-    const index = tabs.value.findIndex(tab => tab.key === key);
+    const index = tabs.value.findIndex((tab) => tab.key === key);
     if (index === -1) return;
 
     if (activeTab.value === key) {
       activeTab.value = tabs.value[index - 1]?.key || tabs.value[index + 1]?.key;
     }
-    tabs.value = tabs.value.filter(tab => tab.key !== key);
+    tabs.value = tabs.value.filter((tab) => tab.key !== key);
   };
 
   const removeOtherTabs = (key: string) => {
-    tabs.value = tabs.value.filter(tab => tab.key === key || !tab.closable);
+    tabs.value = tabs.value.filter((tab) => tab.key === key || !tab.closable);
     activeTab.value = key;
   };
 
   const removeRightTabs = (key: string) => {
-    const index = tabs.value.findIndex(tab => tab.key === key);
+    const index = tabs.value.findIndex((tab) => tab.key === key);
     if (index === -1) return;
 
     tabs.value = tabs.value.filter((tab, i) => i <= index || !tab.closable);
-    if (!tabs.value.some(tab => tab.key === activeTab.value)) {
+    if (!tabs.value.some((tab) => tab.key === activeTab.value)) {
       activeTab.value = key;
     }
   };
 
   const removeLeftTabs = (key: string) => {
-    const index = tabs.value.findIndex(tab => tab.key === key);
+    const index = tabs.value.findIndex((tab) => tab.key === key);
     if (index === -1) return;
 
     tabs.value = tabs.value.filter((tab, i) => i >= index || !tab.closable);
-    if (!tabs.value.some(tab => tab.key === activeTab.value)) {
+    if (!tabs.value.some((tab) => tab.key === activeTab.value)) {
       activeTab.value = key;
     }
   };
 
   const removeAllTabs = () => {
-    tabs.value = tabs.value.filter(tab => !tab.closable);
+    tabs.value = tabs.value.filter((tab) => !tab.closable);
     activeTab.value = 'home';
   };
 
   const toggleFixed = (key: string) => {
-    const tab = tabs.value.find(tab => tab.key === key);
+    const tab = tabs.value.find((tab) => tab.key === key);
     if (tab) {
       tab.fixed = !tab.fixed;
       tab.closable = !tab.fixed;
@@ -132,6 +132,6 @@ export const useTabStore = defineStore('tabs', () => {
     saveTabs,
     restoreTabs,
     saveSettings,
-    restoreSettings
+    restoreSettings,
   };
 });

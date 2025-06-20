@@ -1,6 +1,11 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue';
-import { parsePhoneNumberWithError, AsYouType, getExampleNumber, type CountryCode } from 'libphonenumber-js';
+import {
+  parsePhoneNumberWithError,
+  AsYouType,
+  getExampleNumber,
+  type CountryCode,
+} from 'libphonenumber-js';
 import examples from 'libphonenumber-js/examples.mobile.json';
 
 const props = defineProps<{
@@ -37,6 +42,7 @@ const validatePhoneNumber = (number: string, country: string) => {
     isValid.value = phoneNumber.isValid();
     emit('validate', isValid.value);
   } catch (error) {
+    console.error(error);
     isValid.value = false;
     emit('validate', false);
   }

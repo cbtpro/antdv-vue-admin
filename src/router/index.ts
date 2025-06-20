@@ -56,7 +56,7 @@ const router = createRouter({
             {
               path: 'dynamic',
               name: 'dynamic',
-              component: () => import('@/views/practices/DynamicForm.vue'),
+              component: () => import('@/views/practices/dynamic-form/index.vue'),
               meta: { title: '动态表单' },
             },
             {

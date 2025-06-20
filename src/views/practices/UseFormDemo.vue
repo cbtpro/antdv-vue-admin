@@ -46,7 +46,6 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import type { FormInstance } from 'ant-design-vue';
 import { Form, message } from 'ant-design-vue';
 import type { Rule, RuleObject } from 'ant-design-vue/es/form';
 import { deepClone } from '@/utils';
