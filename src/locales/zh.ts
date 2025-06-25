@@ -7,6 +7,7 @@ export default {
     'dynamic-form': '动态表单',
     stepForm: '分步表单',
     useForm: 'useForm',
+    aiClient: 'AI 客户端',
     about: '关于',
     settings: '设置',
   },

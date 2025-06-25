@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import MainLayout from '@/layouts/MainLayout.vue';
 import Home from '@/views/Home.vue';
+import ApiClient from '@/views/ai-client/ApiClient.vue';
 import About from '@/views/About.vue';
 import Settings from '@/views/Settings.vue';
 
@@ -102,6 +103,12 @@ const router = createRouter({
               meta: { title: 'useForm表单' },
             },
           ],
+        },
+        {
+          path: 'ai-client',
+          name: 'aiClient',
+          component: ApiClient,
+          meta: { title: 'AI 客户端' },
         },
         {
           path: 'about',

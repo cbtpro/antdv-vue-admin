@@ -7,6 +7,7 @@ export default {
     'dynamic-form': 'Dynamic Form Practices',
     stepForm: 'Step Form',
     useForm: 'useForm',
+    aiClient: 'AI Client',
     about: 'About',
     settings: 'Settings',
   },

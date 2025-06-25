@@ -8,6 +8,7 @@ import {
   HomeOutlined,
   FormOutlined,
   InfoCircleOutlined,
+  RobotOutlined,
   SettingOutlined,
   MenuFoldOutlined,
   MenuUnfoldOutlined,
@@ -123,6 +124,12 @@ const defualtMenus: IMenuItem[] = [
         path: '/practices/use-form',
       },
     ],
+  },
+  {
+    key: 'ai-client',
+    icon: RobotOutlined,
+    label: t('menu.aiClient'),
+    path: '/ai-client',
   },
   {
     key: 'about',
